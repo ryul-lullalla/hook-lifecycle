@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components": ["./src/components"],
+      "@constants": ["./src/constants"],
+      "@contexts": ["./src/contexts"],
+      "@graphql": ["./src/graphql"],
+      "@hooks": ["./src/hooks"],
+      "@img": ["./src/img"],
+      "@modules": ["./src/modules"],
+      "@pages": ["./src/pages"],
+      "@routes": ["./src/routes"],
+      "@styles": ["./src/styles"],
+      "@utils": ["./src/utils"]
+    }
+  }
+}

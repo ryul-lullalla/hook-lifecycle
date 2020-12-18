@@ -1,0 +1,36 @@
+module.exports = {
+    env: {
+      browser: true,
+      es6: true,
+      node: true,
+    },
+    extends:['airbnb','prettier/react', 'eslint:recommended','plugin:prettier/recommended'],
+    // prettier/react 추가
+    rules:{
+      'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+      'react/react-in-jsx-scope': 'off',
+      'react/state-in-constructor': 'off',
+      'react/prop-types': 'off',
+      'react/destructuring-assignment': 'off',
+      'react/no-array-index-key': 'off',
+      'react/no-access-state-in-setstate': 'off',
+      'react/sort-comp': 'off',
+      'react-hooks/exhaustive-deps': 'off',
+      'react/jsx-props-no-spreading': 'off',
+      'lines-between-class-members': 'off',
+      'no-unused-vars': ['warn', { args: 'all' }],
+      'no-undef': 'off',
+      'no-else-return': 'off',
+      'no-restricted-globals': 'off',
+      'no-restricted-syntax': 'off',
+      'no-param-reassign': 'off',
+      'no-return-assign': 'off',
+      'no-empty': 'off',
+      'import/prefer-default-export': 'off',
+      'import/no-extraneous-dependencies': 'off',
+      'import/no-unresolved': 'off',
+      'import/order': 'off',
+      'consistent-return': 'off',
+      'no-plusplus': 'off',
+    }
+  };

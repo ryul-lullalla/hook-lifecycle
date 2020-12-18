@@ -1,0 +1,137 @@
+const calcRem = size => `${size / 16}rem`;
+
+const TEXT_STYLES = {
+  H4: {
+    'font-size': 34,
+    'line-height': '1.53',
+    // 'letter-spacing': 8.5,
+  },
+  H5: {
+    'font-size': 24,
+    'line-height': '1.5',
+  },
+  H6: {
+    'font-size': 20,
+    'line-height': '1.5',
+    'font-weight': 500,
+  },
+  TITLE: {
+    'font-size': 18,
+    'line-height': '1.56',
+    'font-weight': 500,
+  },
+  BUTTON1: {
+    'font-size': 18,
+    'line-height': '1.56',
+    'font-weight': 500,
+  },
+  BUTTON2: {
+    'font-size': 13,
+    'line-height': '1.54',
+    'font-weight': 500,
+  },
+  BODY_H: {
+    'font-size': 16,
+    'line-height': '1.5',
+    'font-weight': 'bold',
+  },
+  BODY: {
+    'font-size': 16,
+    'line-height': '1.5',
+  },
+  BODY2: {
+    'font-size': 13,
+    'line-height': '1.54',
+    'font-weight': 500,
+  },
+  SUBTITLE: {
+    'font-size': 16,
+    'line-height': '1.5',
+    'font-weight': 500,
+  },
+  CAPTION_H: {
+    'font-size': 12,
+    'line-height': '1.5',
+    'font-weight': 'bold',
+  },
+  CAPTION: {
+    'font-size': 12,
+    'line-height': '1.5',
+  },
+  OVERLINE: {
+    'font-size': 10,
+    'line-height': '1.6',
+  },
+};
+const SPACING_STYLES = {
+  xxs: '4px',
+  xs: '8px',
+  s: '12px',
+  m: '16px',
+  l: '20px',
+  xl: '24px',
+  xxl: '40px',
+  xxxl: '48px',
+};
+
+const COLORS = {
+  'bw-black-2': '#000000',
+  'bw-white-2': '#ffffff',
+  'gray-gray-1-2': '#616568',
+  'gray-gray-2-2': '#91979d',
+  'gray-gray-3-2': '#c2c9d1',
+  'gray-gray-4-2': '#e0e4e8',
+  'gray-gray-5-2': '#f0f2f3',
+  'gray-gray-6-2': '#f9fafa',
+  'gray-gray-7-2': '#fcfcfd',
+  'primary-primary-1-2': '#402d52',
+  'primary-primary-2-2': '#60447b',
+  'primary-primary-3-2': '#805ba4',
+  'primary-primary-4-2': '#bfadd1',
+  'primary-primary-5-2': '#dfd6e8',
+  'primary-primary-6-2': '#f2eff6',
+  'primary-primary-7-2': '#f9f7fa',
+  'secondary-secondary-1-2': '#71320e',
+  'secondary-secondary-2-2': '#aa4b15',
+  'secondary-secondary-3-2': '#e3641c',
+  'secondary-secondary-4-2': '#f1b28d',
+  'secondary-secondary-5-2': '#f8d8c6',
+  'secondary-secondary-6-2': '#fcefe8',
+  'secondary-secondary-7-2': '#fef7f4',
+  'red-red-1-2': '#711b10',
+  'red-red-2-2': '#a92917',
+  'red-red-3-2': '#e2361f',
+  'red-red-4-2': '#f09b8f',
+  'red-red-5-2': '#f8cdc7',
+  'red-red-6-2': '#fcebe9',
+  'red-red-7-2': '#fef5f4',
+  'green-green-1-2': '#196a26',
+  'green-green-2-2': '#269f39',
+  'green-green-3-2': '#32d44c',
+  'green-green-4-2': '#99e9a6',
+  'green-green-5-2': '#ccf4d2',
+  'green-green-6-2': '#eafbed',
+  'green-green-7-2': '#f5fdf6',
+  'yellow-yellow-1-2': '#766014',
+  'yellow-yellow-2-2': '#b0901d',
+  'yellow-yellow-3-2': '#ebc027',
+  'yellow-yellow-4-2': '#f5df93',
+  'yellow-yellow-5-2': '#faefc9',
+  'yellow-yellow-6-2': '#fdf9e9',
+  'yellow-yellow-7-2': '#fefcf4',
+  'blue-blue-1-2': '#1a556e',
+  'blue-blue-2-2': '#2880a5',
+  'blue-blue-3-2': '#35aadc',
+  'blue-blue-4-2': '#9ad5ee',
+  'blue-blue-5-2': '#cceaf6',
+  'blue-blue-6-2': '#ebf6fb',
+  'blue-blue-7-2': '#f5fbfd',
+  'purple-2': '#6f5c9e',
+};
+const theme = {
+  TEXT_STYLES,
+  SPACING_STYLES,
+  COLORS,
+};
+
+export default theme;
