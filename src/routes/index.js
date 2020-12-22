@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
-import { BREAK_POINT, BREAK_POINT_DEVICE } from '@constants';
+import { BREAK_POINT_DEVICE } from '@constants';
 import { Header } from '@components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MainPage } from '@pages';
@@ -11,13 +11,9 @@ import useDeviceWidth from '@hooks/useDeviceWidth';
 const { desktop, tablet, mobile } = BREAK_POINT_DEVICE;
 
 const Routes = () => {
-  console.log('ROutes');
-
   const currentDevice = useSelector(state => state.deviceStore.device);
-  console.log('after useSelector====', currentDevice);
 
   const [width] = useDeviceWidth(currentDevice);
-  console.log('after useDeviceWidth====', width);
 
   return (
     <>
@@ -26,7 +22,7 @@ const Routes = () => {
         <AppContainer currentWidth={width}>
           <Switch>
             <Route exact path="/" component={MainPage} />
-            <Route exact path="/counter" component={LoginPage} />
+            <Route exact path="/login" component={LoginPage} />
           </Switch>
         </AppContainer>
       </Router>
@@ -37,15 +33,15 @@ const Routes = () => {
 export default Routes;
 
 const GridStyleGuide = css`
-  ${props => console.log(props)}
   @media ${desktop} {
     grid-template-columns: repeat(12, 1fr);
     column-gap: 24px;
-    padding: 0 ${props => 24 + (props.currentWidth - 1440) / 2}px;
+    padding: 0 ${props => props.currentWidth}px;
   }
 `;
 const AppContainer = styled.div`
   display: grid;
+  background-color: ${({ theme }) => theme.COLORS['gray-gray-7-2']};
   @media ${mobile} {
     grid-template-columns: repeat(6, 1fr);
     column-gap: 16px;

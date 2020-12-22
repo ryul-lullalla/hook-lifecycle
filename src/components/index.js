@@ -4,3 +4,4 @@ export * from './Template';
 export * from './header';
 export * from './column';
 export * from './GridContainer';
+export * from './inputWithLabel';

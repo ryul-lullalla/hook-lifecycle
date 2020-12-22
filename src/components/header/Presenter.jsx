@@ -12,6 +12,7 @@ const Presenter = () => {
     console.log('unMount', history);
     history.push('/counter');
   };
+
   return (
     <HeaderContainer col="12">
       <Column col="2">
@@ -32,6 +33,7 @@ export default Presenter;
 const HeaderContainer = styled(GridContainer)`
   display: grid;
   height: 88px;
+  background-color: ${({ theme }) => theme.COLORS['bw-white-2']};
 `;
 
 // const HeaderButton = styled(CustomButton)`
