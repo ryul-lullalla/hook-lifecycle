@@ -1,23 +1,43 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { LoginLogo } from '@img';
 import { GridContainer, Column, InputWithLabel } from '@components';
 import { useForm } from 'react-hook-form';
-
+import CheckIcon from '../../img/checkImg/ic-ic-checkbox.svg';
 const Mainpage = () => {
-  const { register, errors, handleSubmit } = useForm({
-    mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
-    defaultValues: {},
-    criteriaMode: 'all',
-  });
-  const onSubmit = (data, e) => {
+  const [formErrorMessage, setFormErrorMessage] = useState('');
+  const [isSubmitActive, setIsSubmitActive] = useState(false);
+  const { register, handleSubmit, clearErrors, getValues } = useForm();
+
+  const hanldeSubmitButton = (data, e) => {
+    setFormErrorMessage('이메일 또는 비밀번호를 다시 확인하세요.');
     console.log({ data, e });
   };
-  const onError = (error, e) => {
-    console.log({ error, e });
+
+  const handleInputChange = name => {
+    const allValues = getValues();
+    const value = getValues(name);
+    if (formErrorMessage) {
+      setFormErrorMessage('');
+    }
+    if (!value) {
+      clearErrors(name);
+    }
+    return isSubmitActive === detechFormValidation()
+      ? null
+      : setIsSubmitActive(detechFormValidation());
   };
-  console.log({ errors });
+
+  const detechFormValidation = () => {
+    const allValues = getValues(['emailId', 'password']);
+    console.log(allValues);
+    let isFieldFilled = true;
+    for (const property in allValues) {
+      !allValues[property] && (isFieldFilled = false);
+    }
+    return isFieldFilled;
+  };
+
   return (
     <LoginFormGridContainer inherit col="12">
       <Column col="span 4">
@@ -28,34 +48,45 @@ const Mainpage = () => {
       </Column>
       <GridContainer col="8">
         <LoginFormContainer col="2 / 8">
-          <LoginForm onSubmit={handleSubmit(onSubmit, onError)}>
-            <LoginLogo />
+          <LoginForm onSubmit={handleSubmit(hanldeSubmitButton)}>
+            <LoginLogoContainer />
+            {formErrorMessage && (
+              <FormErrorLabel>{formErrorMessage}</FormErrorLabel>
+            )}
             <InputWithLabel
-              type="email"
+              // type=""
               name="emailId"
               placeholder="이메일 계정"
-              ref={register({
-                required: '이메일을 입력해 주세요.',
-                // pattern: {
-                //   value: /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
-                //   message: '대문자 소문자 조합 ㄱㄱ',
-                // },
-              })}
-              onError={errors.emailId}
+              ref={register()}
+              handleErrorField={handleInputChange}
             />
             <InputWithLabel
               type="password"
               name="password"
               placeholder="비밀번호"
               ref={register({
-                required: '비밀번호를 입력해 주세요.',
-                // pattern: {
-                //   value: /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
-                //   message: '비밀번호 조합 ㄱㄱ',
-                // },
+                required: false,
               })}
+              handleErrorField={handleInputChange}
             />
-            <input type="submit" />
+            <LoginSubInput>
+              <SaveIdInfoButtonContainer>
+                <SaveIdInfoButton
+                  type="checkbox"
+                  name="saveIdInfo"
+                  ref={register()}
+                ></SaveIdInfoButton>
+                <SaveIdInfoLabel>아이디 저장</SaveIdInfoLabel>
+              </SaveIdInfoButtonContainer>
+              <FindIdAndPwdContainer>
+                <FindIdAndPwd>아이디・비밀번호 찾기</FindIdAndPwd>
+              </FindIdAndPwdContainer>
+            </LoginSubInput>
+            <LoginFormSubmitButton
+              type="submit"
+              value="로그인"
+              disabled={!isSubmitActive}
+            />
           </LoginForm>
         </LoginFormContainer>
       </GridContainer>
@@ -88,4 +119,64 @@ const LoginForm = styled.form`
 
 const LoginFormGridContainer = styled(GridContainer)`
   background-color: ${({ theme }) => theme.COLORS['gray-gray-7-2']};
+`;
+
+const LoginLogoContainer = styled(LoginLogo)`
+  margin-bottom: ${({ theme }) => theme.SPACING_STYLES.xl};
+`;
+const FormErrorLabel = styled.div`
+  ${({ theme }) => theme.TEXT_STYLES.CAPTION};
+  color: #e2361f;
+  margin-bottom: ${({ theme }) => theme.SPACING_STYLES.xl};
+`;
+
+const LoginSubInput = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 330px;
+  padding: ${({ theme }) => theme.SPACING_STYLES.xs}
+    ${({ theme }) => theme.SPACING_STYLES.m}
+    ${({ theme }) => theme.SPACING_STYLES.xs}
+    ${({ theme }) => theme.SPACING_STYLES.s};
+  margin-bottom: ${({ theme }) => theme.SPACING_STYLES.xl};
+`;
+
+const SaveIdInfoButtonContainer = styled.div`
+  display: flex;
+`;
+const SaveIdInfoButton = styled.input`
+  border-radius: 4px;
+  border: 2px solid ${({ theme }) => theme.COLORS['gray-gray-3-2']};
+  width: 20px;
+  height: 20px;
+  margin: 0 ${({ theme }) => theme.SPACING_STYLES.xs} 0 0;
+  &:checked {
+    background-color: ${({ theme }) => theme.COLORS['primary-primary-3-2']};
+    background-image: url(../../img/checkImg/ic-ic-checkbox.svg);
+  }
+`;
+const SaveIdInfoLabel = styled.label`
+  ${({ theme }) => theme.TEXT_STYLES.BUTTON2};
+  color: ${({ theme }) => theme.COLORS['primary-primary-3-2']};
+`;
+const FindIdAndPwdContainer = styled.div`
+  display: flex;
+  cursor: pointer;
+`;
+const FindIdAndPwd = styled.a`
+  ${({ theme }) => theme.TEXT_STYLES.BUTTON2};
+  color: ${({ theme }) => theme.COLORS['primary-primary-3-2']};
+`;
+
+const LoginFormSubmitButton = styled.input`
+  display: flex;
+  justify-content: center;
+  width: 330px;
+  height: 60px;
+  color: ${({ theme }) => theme.COLORS['bw-white-2']};
+  ${({ theme }) => theme.TEXT_STYLES.BUTTON1};
+  background-color: ${({ theme, disabled }) =>
+    disabled
+      ? theme.COLORS['gray-gray-5-2']
+      : theme.COLORS['secondary-secondary-3-2']};
 `;

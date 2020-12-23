@@ -21,13 +21,18 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video,input {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+}
+input {
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	-o-appearance:none;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 

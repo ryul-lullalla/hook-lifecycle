@@ -2,7 +2,7 @@ import React, { useState, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
 const InputWithLabel = forwardRef(
-  ({ type, name, placeholder, onError }, ref) => {
+  ({ type, name, placeholder, error, handleErrorField }, ref) => {
     const [isFocus, setIsFocus] = useState(false);
     const handleFocus = () => {
       return isFocus ? null : setIsFocus(!isFocus);
@@ -18,21 +18,22 @@ const InputWithLabel = forwardRef(
         }
       }
     };
-    console.log({ onError });
     return (
       <InputWithLabelContainer>
         <Input
           onFocus={handleFocus}
           onBlur={hanldeInputBlur}
-          type={type}
+          type={type || ''}
           name={name}
           isFocus={isFocus}
           ref={ref}
           id={name}
+          onChange={() => handleErrorField(name)}
         />
         <InputLabel htmlFor={name} onClick={handleLabelClick} isFocus={isFocus}>
           {placeholder}
         </InputLabel>
+        {error && <InputError>{error?.message}</InputError>}
       </InputWithLabelContainer>
     );
   },
@@ -62,7 +63,6 @@ const InputLabel = styled.label`
   position: absolute;
   top: 18px;
   transition: top 0.5s ease;
-
   &:hover {
     cursor: text;
   }
@@ -70,12 +70,20 @@ const InputLabel = styled.label`
 `;
 
 const Input = styled.input`
-  padding: 30px ${({ theme }) => theme.SPACING_STYLES.m} 0;
-  width: 284px;
+  padding: 30px ${({ theme }) => theme.SPACING_STYLES.m} 10px;
+  width: 330px;
   height: 60px;
   border: 1px solid ${({ theme }) => theme.COLORS['primary-primary-5-2']};
+  ${({ theme }) => theme.TEXT_STYLES.BODY2}
   &:focus {
     outline: none;
     border: 1px solid ${({ theme }) => theme.COLORS['primary-primary-3-2']};
   }
+`;
+
+const InputError = styled.div`
+  ${({ theme }) => theme.TEXT_STYLES.CAPTION};
+  padding: ${({ theme }) => theme.SPACING_STYLES.xxs}
+    ${({ theme }) => theme.SPACING_STYLES.m} 0;
+  color: ${({ theme }) => theme.COLORS['red-red-3-2']};
 `;
